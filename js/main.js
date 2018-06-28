@@ -1,3 +1,4 @@
+
 function btnClicked() {
     const fromCurVal = document.getElementById("CURR_FR_VAL");
     const fromcur = document.getElementById("CURR_FR");
@@ -18,4 +19,4 @@ function btnClicked() {
     //console.log('THIS IS THE  FROM CURRENCY', fromcur.value);
     //console.log('THIS IS THE TO CURRENCY', toCur.value);
     //console.log('THIS IS THE CONVERTED CURRENCY', toCurVal.value);
-}
+};
