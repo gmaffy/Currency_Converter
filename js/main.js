@@ -81,6 +81,8 @@ function trackInstalling(worker) {
 function loadCurrencies() {
     const selector = document.getElementsByTagName('select');
     const dbPromise = openDatabase();
+    const message = document.getElementById('status_message');
+    //message.innerHTML = "";
     dbPromise.then((db) => {
         fetch("https://free.currencyconverterapi.com/api/v5/currencies")
             .then((response) => {
@@ -111,14 +113,16 @@ function loadCurrencies() {
                         curStore.put(cur);
                     }
                 })
-            }).catch(
-                loadCurFromDB()
-            );
+            }).catch(() => {
+                console.log('You are now offline');
+                loadCurFromDB();
+            })
     });
 }
 
 function loadCurFromDB() {
-    //console.log('WORKING OFFLINE')
+    const message = document.getElementById('status_message');
+    message.innerHTML = "You are now OFFLINE";
     const selector = document.getElementsByTagName('select');
     const dbPromise = openDatabase();
     dbPromise.then((db) => {
@@ -143,6 +147,7 @@ function loadCurFromDB() {
 
 function convertCur() {
     const dbPromise = openDatabase();
+    const messege = document.getElementById('conv_from')
     dbPromise.then((db) => {
         const fromCurVal = document.getElementById("CURR_FR_VAL");
         const fromCur = document.getElementById("CURR_FR");
@@ -166,15 +171,19 @@ function convertCur() {
                 }
                 convStore.put(conv);
                 toCurVal.value = parseFloat(fromCurVal.value) * data[fromTo].val;
+                messege.innerHTML = 'You converted this from the CURRENT RATE';
             });
-        }).catch(
-            convertFromDB()
-        );
+        }).catch(() => {
+            console.log('You are converting from an offline DB')
+            convertFromDB();
+        })
     });
 }
 
 function convertFromDB() {
-    console.log('working from offline database')
+    console.log('working from offline database');
+    const messege = document.getElementById('conv_from')
+    messege.innerHTML = "Your conversion may not be accurate. You are not connected to the internet!";
     const dbPromise = openDatabase();
     dbPromise.then((db) => {
 

@@ -82,6 +82,8 @@ function trackInstalling(worker) {
 function loadCurrencies() {
     const selector = document.getElementsByTagName('select');
     const dbPromise = openDatabase();
+    const message = document.getElementById('status_message');
+    message.innerHTML = "";
     dbPromise.then(function (db) {
         fetch("https://free.currencyconverterapi.com/api/v5/currencies")
             .then(function (response) {
@@ -110,6 +112,8 @@ function loadCurrencies() {
                             name: currencies[curr].currencyName
                         }
                         curStore.put(cur);
+                        message.innerHTML = "You are n";
+
                     }
 
                 })
