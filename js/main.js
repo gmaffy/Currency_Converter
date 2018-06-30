@@ -81,7 +81,7 @@ function trackInstalling(worker) {
 function loadCurrencies() {
     const selector = document.getElementsByTagName('select');
     const dbPromise = openDatabase();
-    const message = document.getElementById('status_message');
+    //const message = document.getElementById('status_message');
     //message.innerHTML = "";
     dbPromise.then((db) => {
         fetch("https://free.currencyconverterapi.com/api/v5/currencies")
@@ -121,8 +121,8 @@ function loadCurrencies() {
 }
 
 function loadCurFromDB() {
-    const message = document.getElementById('status_message');
-    message.innerHTML = "You are now OFFLINE";
+    //const message = document.getElementById('status_message');
+    //message.innerHTML = "You are now OFFLINE";
     const selector = document.getElementsByTagName('select');
     const dbPromise = openDatabase();
     dbPromise.then((db) => {
