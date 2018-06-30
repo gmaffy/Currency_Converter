@@ -143,7 +143,6 @@ function loadCurFromDB() {
             selector[1].appendChild(opt2);
         }
     })
-
 }
 
 function convertCur() {
@@ -176,15 +175,7 @@ function convertCur() {
             }).catch(
                 convertFromDB()
             );
-        
-
-        //console.log('THIS IS THE AMT', fromCurVal.value);
-        //console.log('THIS IS THE  FROM CURRENCY', fromCur.value);
-        //console.log('THIS IS THE TO CURRENCY', toCur.value);
-        //console.log('THIS IS THE CONVERTED CURRENCY', toCurVal.value);
-
     });
-
 }
 
 
@@ -200,19 +191,22 @@ function convertFromDB() {
 
     }).then((conversions) => {
         console.log(conversions.keys())
+        const fromCurVal = document.getElementById("CURR_FR_VAL");
+        const fromCur = document.getElementById("CURR_FR");
+        const toCur = document.getElementById("CURR_TO");
+        let toCurVal = document.getElementById("CURR_VAL");
+        toCurVal.value = "";
         for (con of conversions) {
-            console.log('conves', con)
-            const fromCurVal = document.getElementById("CURR_FR_VAL");
-            const fromCur = document.getElementById("CURR_FR");
-            const toCur = document.getElementById("CURR_TO");
-            let toCurVal = document.getElementById("CURR_VAL");
-            toCurVal.value = "";
+            
             const fromTo = fromCur.value + "_" + toCur.value;
-            if (con[fromTo]) {
-                console.log('YIPPY')
-                toCurVal.value = parseFloat(fromCurVal.value) * con[fromTo]
+            if (fromTo === con["FR_TO"]){
+                console.log('This is the chosen', fromTo, 'This is available', con['FR_TO'])
+                toCurVal.value = parseFloat(fromCurVal.value) * con['VAL'];
+                console.log('This is the conversion', toCurVal.value)
+                return;
             }
         }
+        toCurVal.value = "connection lost reconnect your internet"
     })
 
 }

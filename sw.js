@@ -6,7 +6,6 @@ self.addEventListener('install', function (event) {
                 '/',
                 'js/main.js',
                 'css/style.css',
-                'js/data.js'
             
             ]);
         })
